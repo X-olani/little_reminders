@@ -1,0 +1,112 @@
+{% load static %}
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title>Homepage</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="ScreenOrientation" content="autoRotate:disabled">
+
+    {% comment %} <link rel="stylesheet" href="{% static 'normalize.css' %}" /> {% endcomment %}
+    <link rel="stylesheet" href="{% static 'styles-james.css'%}" />
+
+
+    <link rel='shortcut icon' type='image/x-icon' href="{% static 'logo.png' %}" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    {% block scripts %} {% endblock %}
+</head>
+
+
+
+<body>
+    
+    <nav>
+        <div class="nav-container">
+        {% if user.is_authenticated %}
+            <a  href="{% url 'home' %}">
+                <img src="{% static 'logo1.png'%}">  <h1>Reminder</h1>
+            </a>
+            {% else %}
+             <a class="header-logo" href="{% url 'home' %}">
+                 <h1>Reminder</h1>
+             </a>
+            {%endif%}
+
+           
+        </div>
+        {% if user.is_authenticated %}
+            <img id="nav-manu" class="nav-manu" src="{% static 'manu.svg'%}">
+            <div id ="slider-manu"class='slider-manu' style="width:0;">
+                <div class="user-info">
+                <img src="{% static 'usericon.svg' %}">
+                <label>{{user}}</label>
+                
+            </div>
+            <div class='user-info'>
+            <a href="{% url 'about' %}">
+              <img src="{% static 'info.svg' %}">
+              <label>About</label>
+              </a>
+            </div>
+            <div class='list-info'>
+               
+                {% if num %} 
+                <img src="{% static 'list.svg' %}">
+                <label>Number of Items: {{num}}</label>
+                {% endif %}
+            </div>
+            
+            <div class="logout-container">
+                <form action="/logout/" method="POST">
+                    {%csrf_token %}
+                 <input type="submit" value="Logout">
+            </form>
+     </div>
+    </div>
+
+            {% endif %}  
+
+       
+    </nav>
+    
+    
+    <div   class="content">  
+    {% block content %} {% endblock %}
+    </div>
+  
+    <footer>
+    {% block footer %} {% endblock %}
+    </footer>
+</body>
+
+
+</html>
+<script>
+    $(document).ready(function(){
+     
+ var boxWidth = $(".slider-manu").val();
+ 
+
+        $(".content").click(function(){
+          $(".slider-manu").fadeOut()
+             $(".slider-manu").animate({
+                width: 0
+            }) 
+          
+        })
+   
+     
+        $(".nav-manu").click(function(){
+            $(".slider-manu").show()
+             $(".slider-manu").animate({
+                  width:200
+                   })
+           
+        })
+
+    });
+  
+</script>
+<!-- The core Firebase JS SDK is always required and must be listed first -->

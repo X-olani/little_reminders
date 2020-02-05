@@ -1,0 +1,26 @@
+{% extends 'base_templates.html'%} {% block content %} {% load static %}
+<div class="about-container">
+
+
+
+<div class="about-content">
+
+<p>
+<h3>Hi {{user}},</h3>Welcome to "Little Reminders".<br>
+So what is Little Reminders? Well it is an app that notifies you when your stored consumables
+are near their expiry date. You will be notified two days before the item expires.
+</p>
+</div>
+
+
+</div>
+
+
+{% endblock %}
+{% block footer %}
+
+<a class="add-url" href="{% url 'home'%}">
+     Back <img class="backarrow" src="{% static 'backarrow.svg' %}">
+</a>
+
+{% endblock %}

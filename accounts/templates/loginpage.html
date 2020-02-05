@@ -1,0 +1,17 @@
+{% extends 'base_templates.html'%} {% block content %} {% load static %}
+<div class="login-container">
+    <div class="logo-holder">
+        <img src="{% static 'logo1.png' %} ">
+    </div>
+
+    <form class="login-form" action="/login/" method="POST">
+        {%csrf_token %} {{form}}
+        <div class='login-buttons-container'>
+         <button class="login-buttons" type="submit" value="Login"><p>Login</p></button>
+         <a class="login" href="{% url 'signup'%}">
+            <label>Sign in</label>
+         </a>
+         </div>
+        </div>
+    </form>
+</div> {% endblock %}

@@ -1,0 +1,20 @@
+{% extends 'base_templates.html'%}
+{% block content %}
+<div class="table-container">
+
+    <form class='signup-form' action="/send_note/" method="POST">
+        {%csrf_token %}
+
+        <textarea placeholder="send to all users" name="message"></textarea>
+        <input type="submit" value="Send">
+
+    </form>
+    <br>
+    <form action="/send_one_user/" method="POST">
+        {%csrf_token %}
+
+        <textarea placeholder="send to one user" name="message"></textarea>
+        <input type="submit" value="Send">
+
+    </form>
+</div> {% endblock %}
